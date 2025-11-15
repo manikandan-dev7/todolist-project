@@ -1,0 +1,49 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Animated gradient background */
+.animated-bg {
+  position: relative;
+  min-height: 100vh;
+  background: #000;
+  overflow: hidden;
+}
+
+.animated-bg::before,
+.animated-bg::after {
+  content: "";
+  position: absolute;
+  width: 480px;
+  height: 480px;
+  border-radius: 9999px;
+  filter: blur(80px);
+  opacity: 0.6;
+  z-index: 0;
+  animation: floatBlob 18s ease-in-out infinite alternate;
+}
+
+.animated-bg::before {
+  top: -120px;
+  left: -120px;
+  background: radial-gradient(circle, #2563eb, #7c3aed);
+}
+
+.animated-bg::after {
+  bottom: -140px;
+  right: -140px;
+  background: radial-gradient(circle, #22d3ee, #4f46e5);
+  animation-duration: 22s;
+}
+
+@keyframes floatBlob {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(40px, -30px, 0) scale(1.05);
+  }
+  100% {
+    transform: translate3d(-30px, 40px, 0) scale(1.1);
+  }
+}
