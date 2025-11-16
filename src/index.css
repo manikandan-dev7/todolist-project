@@ -62,25 +62,26 @@ body {
 }
 
 /* Hide scrollbar but keep scrolling */
-.scroll-hidden {
+.scrollbar-hide {
   -ms-overflow-style: none; /* IE + Edge */
-  scrollbar-width: none; /* Firefox */
+  scrollbar-width: none;    /* Firefox */
 }
 
-.scroll-hidden::-webkit-scrollbar {
-  display: none; /* Chrome, Safari */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;            /* Chrome, Safari */
 }
-/* Remove default icon */
+
+/* Custom white calendar icon for date inputs */
+
+/* hide default icon but keep it clickable */
 input[type="date"]::-webkit-calendar-picker-indicator {
   opacity: 0;
   cursor: pointer;
-  position: relative;
-  width: 100%;
 }
 
-/* Custom white calendar icon */
+/* add our own white icon */
 input[type="date"] {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='white' viewBox='0 0 24 24'%3E%3Cpath d='M7 10h2v2H7v-2zm4 0h2v2h-2v-2zm4 0h2v2h-2v-2zM7 14h2v2H7v-2zm4 14h2v2h-2v-2zm4 0h2v2h-2v-2z'/%3E%3Cpath d='M19 3h-1V1h-2v2H8V1H6v2H5c-1.1 0-2 .9-2 2v15c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 17H5V8h14v12z'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='white' viewBox='0 0 24 24'%3E%3Cpath d='M7 10h2v2H7v-2zm4 0h2v2h-2v-2zm4 0h2v2h-2v-2zM7 14h2v2H7v-2zm4 0h2v2h-2v-2zm4 0h2v2h-2v-2z'/%3E%3Cpath d='M19 3h-1V1h-2v2H8V1H6v2H5c-1.1 0-2 .9-2 2v15c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 17H5V8h14v12z'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
   background-position: right 12px center;
   background-size: 22px;
