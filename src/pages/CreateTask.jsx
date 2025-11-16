@@ -76,7 +76,9 @@ const CreateTask = ({
           onChange={(e) => handleTaskDataChange("Priority", e.target.value)}
           required
         >
-          <option value="" disabled hidden>Select Priority</option>
+          <option value="" disabled hidden>
+            Select Priority
+          </option>
           <option value="Immediate">Immediate</option>
           <option value="High">High Priority</option>
           <option value="Medium">Medium</option>
