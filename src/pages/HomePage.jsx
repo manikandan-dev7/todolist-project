@@ -42,7 +42,7 @@ const HomePage = ({ TaskTableData, handleEdit, handleDelete }) => {
 
       {/* Table */}
       <div className="relative z-10 w-full max-w-4xl mt-12">
-        <div className="overflow-x-auto bg-neutral-900/90 border border-neutral-800 backdrop-blur-md shadow-2xl rounded-2xl transition-shadow duration-300 hover:shadow-[0_0_45px_rgba(59,130,246,0.7)]">
+        <div className="overflow-x-auto scroll-hidden bg-neutral-900/90 border border-neutral-800 backdrop-blur-md shadow-2xl rounded-2xl transition-shadow duration-300 hover:shadow-[0_0_45px_rgba(59,130,246,0.7)]">
           <table className="w-full min-w-[900px] text-center text-white">
             <thead>
               <tr className="text-sm tracking-wide uppercase bg-neutral-800/90">
