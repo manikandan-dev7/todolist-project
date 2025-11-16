@@ -21,11 +21,10 @@ const CreateTask = ({
 
       <form
         className="relative z-10 bg-neutral-900/90 border border-neutral-800 shadow-2xl rounded-2xl p-8 w-full max-w-3xl
-                   backdrop-blur-md transition-all duration-300
-                   hover:shadow-[0_0_40px_rgba(59,130,246,0.7)] hover:-translate-y-1"
+                   backdrop-blur-md transition-shadow duration-300
+                   hover:shadow-[0_0_40px_rgba(59,130,246,0.7)]"
         onSubmit={(e) => handleCreate(e, navigate)}
       >
-        {/* Form Header */}
         <h2 className="mb-6 text-2xl font-semibold text-white md:text-3xl">
           {EditIndex === null ? "Task Details" : "Edit Task Details"}
         </h2>
@@ -35,7 +34,7 @@ const CreateTask = ({
           Title
         </label>
         <input
-          className="w-full p-3 mb-4 text-white transition-all duration-200 border rounded-lg bg-neutral-950 border-neutral-700 focus:outline-none focus:border-violet-500 focus:ring-1 focus:ring-violet-500"
+          className="w-full p-3 mb-4 text-white transition-colors duration-200 border rounded-lg bg-neutral-950 border-neutral-700 focus:outline-none focus:border-violet-500 focus:ring-1 focus:ring-violet-500"
           type="text"
           required
           placeholder="Enter task title"
@@ -55,31 +54,40 @@ const CreateTask = ({
           onChange={(e) => handleTaskDataChange("Description", e.target.value)}
         ></textarea>
 
-        {/* Status */}
+        {/* Due Date */}
         <label className="block mb-1 font-medium text-gray-200 md:text-lg">
-          Status
+          Due Date
+        </label>
+        <input
+          type="date"
+          className="w-full p-3 mb-4 text-white transition-colors duration-200 border rounded-lg bg-neutral-950 border-neutral-700 focus:outline-none focus:border-violet-500 focus:ring-1 focus:ring-violet-500"
+          value={TaskData.DueDate}
+          onChange={(e) => handleTaskDataChange("DueDate", e.target.value)}
+          required
+        />
+
+        {/* Priority */}
+        <label className="block mb-1 font-medium text-gray-200 md:text-lg">
+          Priority
         </label>
         <select
-          className="w-full p-3 mb-6 text-white transition-all duration-200 border rounded-lg bg-neutral-950 border-neutral-700 focus:outline-none focus:border-violet-500 focus:ring-1 focus:ring-violet-500"
+          className="w-full p-3 mb-6 text-white transition-colors duration-200 border rounded-lg bg-neutral-950 border-neutral-700 focus:outline-none focus:border-violet-500 focus:ring-1 focus:ring-violet-500"
+          value={TaskData.Priority}
+          onChange={(e) => handleTaskDataChange("Priority", e.target.value)}
           required
-          value={TaskData.Status}
-          onChange={(e) => handleTaskDataChange("Status", e.target.value)}
         >
-          <option value="" disabled hidden>
-            Select status
-          </option>
-          <option value="Pending">Pending</option>
-          <option value="OnProcess">On Process</option>
-          <option value="Completed">Completed</option>
+          <option value="" disabled hidden>Select Priority</option>
+          <option value="Immediate">Immediate</option>
+          <option value="High">High Priority</option>
+          <option value="Medium">Medium</option>
+          <option value="Low">Low Priority</option>
         </select>
 
         {/* Action Buttons */}
         <div className="flex justify-end gap-4 mt-4">
           <button
             type="button"
-            className="px-6 py-2 rounded-lg bg-neutral-800 text-gray-200
-                       hover:bg-neutral-700 hover:scale-105 hover:-translate-y-0.5
-                       active:scale-95 transition-all duration-200"
+            className="px-6 py-2 text-gray-200 transition-all duration-200 rounded-lg bg-neutral-800 hover:bg-neutral-700 hover:scale-105 active:scale-95"
             onClick={() => {
               setTaskData(initialTaskData);
               setEditIndex(null);
@@ -92,7 +100,7 @@ const CreateTask = ({
           <button
             type="submit"
             className="px-6 py-2 rounded-lg bg-gradient-to-r from-blue-600 to-violet-600 text-white font-semibold
-                       hover:shadow-[0_0_25px_rgba(129,140,248,0.9)] hover:scale-110 hover:-translate-y-0.5
+                       hover:shadow-[0_0_25px_rgba(129,140,248,0.9)] hover:scale-110
                        active:scale-95 transition-all duration-200"
           >
             {EditIndex === null ? "Create Task" : "Update Task"}

@@ -1,8 +1,12 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
 
-/* Animated gradient background */
+body {
+  font-family: "Poppins", sans-serif;
+}
+
 .animated-bg {
   position: relative;
   min-height: 100vh;
@@ -10,40 +14,48 @@
   overflow: hidden;
 }
 
+/* floating particles */
 .animated-bg::before,
 .animated-bg::after {
   content: "";
   position: absolute;
-  width: 480px;
-  height: 480px;
-  border-radius: 9999px;
-  filter: blur(80px);
-  opacity: 0.6;
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+  filter: blur(120px);
+  opacity: 0.55;
+  animation: moveAcross 22s linear infinite;
   z-index: 0;
-  animation: floatBlob 18s ease-in-out infinite alternate;
 }
 
 .animated-bg::before {
   top: -120px;
-  left: -120px;
-  background: radial-gradient(circle, #2563eb, #7c3aed);
+  left: -200px;
+  background: radial-gradient(circle, #4f46e5, #3b82f6);
 }
 
 .animated-bg::after {
-  bottom: -140px;
-  right: -140px;
-  background: radial-gradient(circle, #22d3ee, #4f46e5);
-  animation-duration: 22s;
+  bottom: -200px;
+  right: -200px;
+  background: radial-gradient(circle, #9333ea, #2563eb);
+  animation-duration: 28s;
+  animation-direction: reverse;
 }
 
-@keyframes floatBlob {
+@keyframes moveAcross {
   0% {
-    transform: translate3d(0, 0, 0) scale(1);
+    transform: translate(-200px, -100px) scale(1);
+  }
+  25% {
+    transform: translate(150px, -50px) scale(1.1);
   }
   50% {
-    transform: translate3d(40px, -30px, 0) scale(1.05);
+    transform: translate(100px, 120px) scale(1.05);
+  }
+  75% {
+    transform: translate(-150px, 80px) scale(1.12);
   }
   100% {
-    transform: translate3d(-30px, 40px, 0) scale(1.1);
+    transform: translate(-200px, -100px) scale(1);
   }
 }
