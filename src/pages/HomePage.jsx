@@ -16,10 +16,10 @@ const HomePage = ({ TaskTableData, handleEdit, handleDelete }) => {
         Task Management Dashboard
       </h1>
 
-      {/* Search & Create */}
+      {/* Search + Create */}
       <div className="relative z-10 flex flex-col items-center justify-center w-full max-w-3xl gap-4 mt-10 md:flex-row">
-        <div className="flex items-center bg-neutral-900/90 border border-neutral-800 rounded-xl px-4 py-3 w-full md:w-[70%] shadow-lg
-                        transition-colors duration-300 hover:border-violet-500 hover:shadow-[0_0_25px_rgba(129,140,248,0.5)]">
+        {/* Search */}
+        <div className="flex items-center w-full px-4 py-3 bg-neutral-900/90 border border-neutral-800 rounded-xl shadow-lg transition-colors duration-300 hover:border-violet-500 hover:shadow-[0_0_25px_rgba(129,140,248,0.5)] md:w-[70%]">
           <input
             type="text"
             placeholder="Search tasks..."
@@ -29,48 +29,80 @@ const HomePage = ({ TaskTableData, handleEdit, handleDelete }) => {
           />
         </div>
 
+        {/* Create button */}
         <button
           className="px-6 py-3 font-semibold text-white rounded-xl bg-gradient-to-r from-blue-600 to-violet-600 shadow-lg
-                     hover:shadow-[0_0_25px_rgba(129,140,248,0.9)] hover:scale-105 active:scale-95 transition-all duration-200"
+                     hover:shadow-[0_0_25px_rgba(129,140,248,0.9)] hover:scale-105
+                     active:scale-95 transition-all duration-200"
           onClick={() => navigate("/task")}
         >
           Create New Task
         </button>
       </div>
 
-      {/* Data Table */}
+      {/* Table */}
       <div className="relative z-10 w-full max-w-4xl mt-12">
-        <div className="overflow-x-auto bg-neutral-900/90 border border-neutral-800 backdrop-blur-md shadow-2xl rounded-2xl
-                        transition-shadow duration-300 hover:shadow-[0_0_45px_rgba(59,130,246,0.7)]">
-
-          <table className="w-full min-w-[800px] text-center text-white">
+        <div className="overflow-x-auto bg-neutral-900/90 border border-neutral-800 backdrop-blur-md shadow-2xl rounded-2xl transition-shadow duration-300 hover:shadow-[0_0_45px_rgba(59,130,246,0.7)]">
+          <table className="w-full min-w-[900px] text-center text-white">
             <thead>
               <tr className="text-sm tracking-wide uppercase bg-neutral-800/90">
                 <th className="p-4 border-b border-neutral-700">Title</th>
                 <th className="p-4 border-b border-neutral-700">Description</th>
-                <th className="p-4 border-b border-neutral-700">Status</th>
                 <th className="p-4 border-b border-neutral-700">Due Date</th>
+                <th className="p-4 border-b border-neutral-700">Priority</th>
+                <th className="p-4 border-b border-neutral-700">Status</th>
                 <th className="p-4 border-b border-neutral-700">Actions</th>
               </tr>
             </thead>
 
             <tbody>
+              {/* No results */}
               {filteredTasks.length === 0 && (
                 <tr>
-                  <td colSpan="5" className="p-10 text-lg font-medium text-gray-400">
+                  <td colSpan="6" className="p-10 text-lg font-medium text-gray-400">
                     No tasks found. Try updating your search criteria.
                   </td>
                 </tr>
               )}
 
+              {/* Task Rows */}
               {filteredTasks.map((data, idx) => (
-                <tr key={idx} className="transition-all duration-200 hover:bg-neutral-800/80">
+                <tr
+                  key={idx}
+                  className="transition-colors duration-200 hover:bg-neutral-800/80"
+                >
                   <td className="p-4 border-b border-neutral-800">{data.Title}</td>
                   <td className="p-4 border-b border-neutral-800">{data.Description}</td>
 
+                  {/* Due Date */}
+                  <td className="p-4 border-b border-neutral-800">
+                    <span className="px-3 py-1 text-sm font-medium text-blue-300 rounded-full bg-blue-600/30">
+                      {data.DueDate}
+                    </span>
+                  </td>
+
+                  {/* Priority */}
                   <td className="p-4 border-b border-neutral-800">
                     <span
-                      className={`px-3 py-1 rounded-xl text-sm font-medium
+                      className={`px-3 py-1 rounded-full text-sm font-medium
+                        ${
+                          data.Priority === "Immediate"
+                            ? "bg-red-600/40 text-red-300"
+                            : data.Priority === "High"
+                            ? "bg-orange-600/40 text-orange-300"
+                            : data.Priority === "Medium"
+                            ? "bg-yellow-600/40 text-yellow-300"
+                            : "bg-green-600/40 text-green-300"
+                        }`}
+                    >
+                      {data.Priority}
+                    </span>
+                  </td>
+
+                  {/* Status */}
+                  <td className="p-4 border-b border-neutral-800">
+                    <span
+                      className={`px-3 py-1 rounded-full text-sm font-medium
                       ${
                         data.Status === "Pending"
                           ? "bg-yellow-600/40 text-yellow-300"
@@ -83,17 +115,7 @@ const HomePage = ({ TaskTableData, handleEdit, handleDelete }) => {
                     </span>
                   </td>
 
-                  {/* Due Date Column */}
-                  <td className="p-4 font-semibold text-blue-300 border-b border-neutral-800">
-                    {data.DueDate
-                      ? new Date(data.DueDate).toLocaleDateString("en-GB", {
-                          day: "2-digit",
-                          month: "short",
-                          year: "numeric",
-                        })
-                      : "—"}
-                  </td>
-
+                  {/* Edit / Delete */}
                   <td className="flex justify-center p-4 space-x-3 border-b border-neutral-800">
                     <button
                       className="px-4 py-2 bg-blue-600 rounded-lg shadow-sm
@@ -103,6 +125,7 @@ const HomePage = ({ TaskTableData, handleEdit, handleDelete }) => {
                     >
                       Edit
                     </button>
+
                     <button
                       className="px-4 py-2 bg-red-600 rounded-lg shadow-sm
                                  md:hover:bg-red-500 md:hover:shadow-[0_0_18px_rgba(248,113,113,0.8)]
@@ -115,9 +138,7 @@ const HomePage = ({ TaskTableData, handleEdit, handleDelete }) => {
                 </tr>
               ))}
             </tbody>
-
           </table>
-
         </div>
       </div>
     </div>
